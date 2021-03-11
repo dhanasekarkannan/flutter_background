@@ -1,3 +1,4 @@
+import 'package:background/main.dart';
 import 'package:flutter/material.dart';
 
 class AppLifeCycleWidget extends StatefulWidget {
@@ -35,12 +36,12 @@ class _AppLifeCycleWidgetState extends State<AppLifeCycleWidget>
       setState(() {
         _state = state;
       });
-      Navigator.of(context).popUntil((route) => route.isFirst);
+      // Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return  widget.child;
+    return  _state == AppLifecycleState.resumed ? MyHomePage(title: "homePage",) :  widget.child;
   }
 }
