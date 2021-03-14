@@ -1,6 +1,8 @@
+import 'package:background/bloc/navigate_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
-class FirstScreen extends StatelessWidget {
+class FirstScreen extends StatelessWidget with NavigateState{
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -20,7 +22,8 @@ class FirstScreen extends StatelessWidget {
             ElevatedButton(
                 child: Text("Next Page"),
                 onPressed: () {
-                  Navigator.of(context).pushNamed("SecondPage");
+                BlocProvider.of<NavigateBloc>(context).add(NavigateEvent.SecondScreen);
+                
                 })
           ],
         ));

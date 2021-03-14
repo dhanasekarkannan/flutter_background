@@ -1,6 +1,8 @@
+import 'package:background/bloc/background_bloc.dart';
+import 'package:background/bloc/navigate_bloc.dart';
 import 'package:flutter/material.dart';
 
-class SecondScreen extends StatefulWidget {
+class SecondScreen extends StatefulWidget with NavigateState{
   @override
   _SecondScreenState createState() => _SecondScreenState();
 }
