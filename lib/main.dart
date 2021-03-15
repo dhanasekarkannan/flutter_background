@@ -70,9 +70,7 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
     print("State code : $state");
     if (state == AppLifecycleState.paused) {
       BlocProvider.of<BackgroundBloc>(context).add(BackgroundEvent.PauseEvent);
-    } else {
-      BlocProvider.of<BackgroundBloc>(context).add(BackgroundEvent.LiveEvent);
-    }
+    } 
   }
 
   @override
@@ -82,10 +80,12 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
         print("Backgroud  enabled:$background ");
         return BlocBuilder<NavigateBloc, NavigateState>(
             builder: (BuildContext context, state) {
-          print("state  enabled:$state ");
+          print("state  enabled:$state & background: $background");
           if (background == true) {
             BlocProvider.of<NavigateBloc>(context)
                 .add(NavigateEvent.FirstScreenEvent);
+            BlocProvider.of<BackgroundBloc>(context)
+                .add(BackgroundEvent.LiveEvent);
           }
           return state as Widget;
         });
