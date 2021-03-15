@@ -1,22 +1,18 @@
-import 'package:background/pages/firstScreen.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-enum BackgroundEvent {
-  live,
-  background
-}
+enum BackgroundEvent { LiveEvent, PauseEvent }
 
-
-class BackgroundBloc extends Bloc<BackgroundEvent,bool> {
+class BackgroundBloc extends Bloc<BackgroundEvent, bool> {
   BackgroundBloc() : super(false);
 
   @override
-  Stream<bool> mapEventToState(BackgroundEvent event) async*{
-    if(event == BackgroundEvent.background){
-      print("Event Clicked : $event");
+  Stream<bool> mapEventToState(BackgroundEvent event) async* {
+    print("Event Clicked : $event");
+
+    if (event == BackgroundEvent.PauseEvent) {
       yield true;
+    } else {
+      yield false;
     }
-    // throw UnimplementedError(); 
   }
-  
 }

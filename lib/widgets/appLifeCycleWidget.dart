@@ -36,12 +36,15 @@ class _AppLifeCycleWidgetState extends State<AppLifeCycleWidget>
       setState(() {
         _state = state;
       });
-      // Navigator.of(context).popUntil((route) => route.isFirst);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return  _state == AppLifecycleState.resumed ? MyHomePage(title: "homePage",) :  widget.child;
+    return _state == AppLifecycleState.resumed
+        ? MyHomePage(
+            title: "homePage",
+          )
+        : widget.child;
   }
 }

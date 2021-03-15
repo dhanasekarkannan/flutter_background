@@ -69,43 +69,27 @@ class _MyHomePageState extends State<MyHomePage> with WidgetsBindingObserver {
   void didChangeAppLifecycleState(AppLifecycleState state) {
     print("State code : $state");
     if (state == AppLifecycleState.paused) {
-      BlocProvider.of<BackgroundBloc>(context).add(BackgroundEvent.background);
-    }else {
-      BlocProvider.of<BackgroundBloc>(context).add(BackgroundEvent.live);
+      BlocProvider.of<BackgroundBloc>(context).add(BackgroundEvent.PauseEvent);
+    } else {
+      BlocProvider.of<BackgroundBloc>(context).add(BackgroundEvent.LiveEvent);
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<NavigateBloc>(
-      create: (context) => NavigateBloc(),
-      child: BlocBuilder<BackgroundBloc, bool>(
-        builder: (BuildContext context, background) {
-          print("Backgroud  enabled:$background ");
-          return BlocBuilder<NavigateBloc, NavigateState>(
-              builder: (BuildContext context, state) {
-            print("state  enabled:$state ");
-            if(background == true)
-             BlocProvider.of<NavigateBloc>(context).add(NavigateEvent.FirstScreen);
-            return state as Widget;
-          });
-        },
-      ),
+    return BlocBuilder<BackgroundBloc, bool>(
+      builder: (BuildContext context, background) {
+        print("Backgroud  enabled:$background ");
+        return BlocBuilder<NavigateBloc, NavigateState>(
+            builder: (BuildContext context, state) {
+          print("state  enabled:$state ");
+          if (background == true) {
+            BlocProvider.of<NavigateBloc>(context)
+                .add(NavigateEvent.FirstScreenEvent);
+          }
+          return state as Widget;
+        });
+      },
     );
-
-    // return StreamBuilder(
-    //   stream: checkLifeCycleEvent(),
-    //   builder: (context, snapshot) {
-    //     if (snapshot.hasError) {
-    //       return Text("Error in stream");
-    //     } else if (snapshot.connectionState == ConnectionState.waiting) {
-    //       return CircularProgressIndicator();
-    //     } else if (snapshot.hasData) {
-    //       print("success snapshot : $snapshot");
-    //       Navigator.of(context).popUntil((route) => route.isFirst);
-    //     }
-    //     return FirstScreen();
-    //   },
-    // );
   }
 }
